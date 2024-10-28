@@ -26,7 +26,7 @@ import com.hotels.api01.model.ResvDao;
 import com.hotels.api01.model.ResvVo;
 import com.hotels.api01.model.UsersDao;
 import com.hotels.api01.model.UsersVo;
-
+///test
 @RestController
 public class HomeController {
 	@Autowired
