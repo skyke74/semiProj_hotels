@@ -24,9 +24,10 @@ import com.hotels.api01.model.FavVo;
 import com.hotels.api01.model.HotelsDao;
 import com.hotels.api01.model.ResvDao;
 import com.hotels.api01.model.ResvVo;
+import com.hotels.api01.model.TourDao;
 import com.hotels.api01.model.UsersDao;
 import com.hotels.api01.model.UsersVo;
-///test
+
 @RestController
 public class HomeController {
 	@Autowired
@@ -41,6 +42,8 @@ public class HomeController {
 	ResvDao resvDao;
 	@Autowired
 	FavDao favDao;
+	@Autowired
+	TourDao tourDao;
 	
 //	@RequestMapping(value = "/", method = RequestMethod.GET)
 //	public ResponseEntity<?> home() {
@@ -87,6 +90,14 @@ public class HomeController {
 		return ResponseEntity.ok(usersDao.editPassword(bean));
 	}
 
+	/////////Tour
+	@GetMapping("/hotels/searchTour/{loc_name}")
+	public ResponseEntity<?> searchTour(@PathVariable String loc_name) {
+		if(loc_name.equals("all")) {
+			return ResponseEntity.ok(tourDao.searchTourAll());
+		}else
+			return ResponseEntity.ok(tourDao.searchTour(loc_name));
+	}
 	/////////Resv
 	@GetMapping("/hotels/userResv/{user}")
 	public ResponseEntity<?> userResv(@PathVariable String user) {

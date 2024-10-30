@@ -20,9 +20,10 @@ import com.hotels.api01.model.FavDao;
 import com.hotels.api01.model.FavVo;
 import com.hotels.api01.model.HotelsDao;
 import com.hotels.api01.model.ResvDao;
+import com.hotels.api01.model.TourDao;
 import com.hotels.api01.model.UsersDao;
 import com.hotels.api01.model.UsersVo;
-
+//test
 @Controller
 public class testController {
 	@Autowired
@@ -33,10 +34,12 @@ public class testController {
 	ResvDao resvDao;
 	@Autowired
 	FavDao favDao;
+	@Autowired
+	TourDao tourDao;
 
 	@RequestMapping("/")
 	public String home(Model model) {
-		model.addAttribute("result",hotelsDao.searchHotel(1,"qwe"));
+		model.addAttribute("result",tourDao.searchTour("±§¡÷"));
 		return "home";
 	}
 	
