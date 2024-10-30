@@ -51,7 +51,7 @@
     <ul class="nav navbar-nav navbar-right custom-nav">
     	<li><a class="user" href="${root }/mypage">${sessionScope.user }님 환영합니다.</a></li>
         <li><a class="text-uppercase" href="${root }/">home</a></li>
-        <li><a class="text-uppercase" href="${root }/intro">관광명소</a></li>
+        <li><a class="text-uppercase" href="${root }/travel/all">관광명소</a></li>
         <li><a class="text-uppercase" href="${root }/help">도움말</a></li>
         <li><a class="text-uppercase login" href="${root }/login">로그인</a></li>
         <li><a class="text-uppercase logout" href="${root }/logout">로그아웃</a></li>

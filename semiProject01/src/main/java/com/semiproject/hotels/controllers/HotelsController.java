@@ -16,12 +16,21 @@ import org.springframework.web.client.RestTemplate;
 import com.semiproject.hotels.model.DeptVo;
 import com.semiproject.hotels.model.FavVo;
 import com.semiproject.hotels.model.HotelsVo;
+import com.semiproject.hotels.model.TourVo;
 
 @Controller
 public class HotelsController {
 	
 	String url="http://localhost:8080/api01/";
 	
+	@GetMapping("/travel/{loc_name}")
+	public String travel(Model model,@PathVariable String loc_name) {
+		model.addAttribute("loc_name", loc_name);
+		RestTemplate template=new RestTemplate();
+		List<TourVo> list=template.getForObject(url+"hotels/searchTour/"+loc_name, List.class);
+		model.addAttribute("list", list);
+		return "hotels/travel";
+	}
 	@GetMapping("/searchResults")
 	public String searchResult(Model model,String location,Date checkin,Date checkout,int guests) {
 //		System.out.println(location);

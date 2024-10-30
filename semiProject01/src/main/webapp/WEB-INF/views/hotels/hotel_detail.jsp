@@ -57,7 +57,16 @@
                 
                  <div class="description-text2">
                     <h1><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><a class="resv" type="button"> 예약하기</a></h1>  
-                    <h1><span class="glyphicon glyphicon-star" aria-hidden="true"></span><a class="fav" type="button"> 즐겨찾기</a></h1>          
+                    <h1><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                    	<c:choose>
+                    		<c:when test='${list.user_name eq sessionScope.user && !empty list.user_name}'>
+	                    		<a class="fav_del" type="button"> 즐겨찾기 취소</a>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<a class="fav" type="button"> 즐겨찾기</a>
+	                    	</c:otherwise>
+                    	</c:choose>
+                    </h1>          
                 </div>
             </div>
      	<script type="text/javascript">
@@ -81,13 +90,14 @@
      				confirmBookmark();
      			}
      		});
-			var fav_btn=document.querySelector('.fav');
-     		if('${list.user_name}'=='${sessionScope.user}' && '${sessionScope.user}'.length()>0){
-     			fav_btn.innerHTML='즐겨찾기 취소';
-     			$('.fav').click(function(e){
+     		$('.fav_del').click(function(e){
+     			if('${sessionScope.user}'==''){
+	     			alert("로그인 후 즐겨찾기가 가능합니다.");
+     				return;
+     			}else{
      				disableBookmark();
-     			});
-     		}
+     			}
+     		});
      	</script>
            	<div class="title-container">
             <p>주변정보</p> 

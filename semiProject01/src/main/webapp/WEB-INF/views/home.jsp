@@ -10,7 +10,59 @@
 <body>
 <%@include file="template/menu.jspf" %>
 <%@include file="template/search.jspf" %>
-	<h1>추천 숙소</h1>
+
+<h1 style="text-align: left;">인기 여행지</h1>
+<div class="jumbotron section" style="background-color: transparent;">
+  <div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+    <a href="${root }/travel/서울">
+      <div class="thumbnail">
+        <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcS4UUWueGR4OKVX6q2u4hN-_e1FQFjZVn8MjmyRME4acaBgdVNJT2GQad2l_wpzUE6R3RubusLxTN1Bcaajqv2e9_kOe-GDj13dT0M-YQ" alt="서울">
+        <div class="caption">
+          <p>서울</p>
+        </div>
+      </div>
+      </a>
+    </div>
+    
+    <div class="col-sm-3">
+    <a href="${root }/travel/부산">
+      <div class="thumbnail">
+        <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTRGcTTGFt_2wlhrTMZPD7hPIFt1jeskT--_Vu0vaMZ3Jd8pHw0p-aNPr08O8EplR9uMersnpYj5k9CYsFf4vqgm4xYJSjZoqjL_wDKMQ" alt="부산">
+        <div class="caption">
+          <p>부산</p>
+        </div>
+      </div>
+      </a>
+    </div>
+    
+    <div class="col-sm-3">
+    <a href="${root }/travel/광주">
+      <div class="thumbnail">
+        <img src="https://lh5.googleusercontent.com/p/AF1QipOl8-euekhnvXyoL_zR6AM8E_y2D2HGKPO3ZQLb=w540-h312-n-k-no" alt="광주">
+        <div class="caption">
+          <p>광주</p>
+        </div>
+      </div>
+      </a>
+    </div>
+    
+    <div class="col-sm-3">
+    <a href="${root }/travel/제주">
+      <div class="thumbnail">
+        <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTTsC0_IudD79eKX8o3jSRnWW9JLmlxFIa3Ypw-ublXlWzbf5b13ZjHASUX9vw8Slvf4G7XYyT1P6wIlim1KoCqvSMdBxWKZGLLnRtwsQ" alt="제주도">
+        <div class="caption">
+          <p>제주도</p>
+        </div>
+      </div>
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+
+<h1>추천 숙소</h1>
 	<div class="jumbotron section" style="background-color: transparent;">
   		<div class="container">
     		<div class="row">
@@ -52,54 +104,6 @@
     </div>
   </div>
 </div>
-
-
-  
-
-
-<h1 style="text-align: left;">인기 여행지</h1>
-<div class="jumbotron section" style="background-color: transparent;">
-  <div class="container">
-  <div class="row">
-    <div class="col-sm-3">
-      <div class="thumbnail">
-        <img src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcS4UUWueGR4OKVX6q2u4hN-_e1FQFjZVn8MjmyRME4acaBgdVNJT2GQad2l_wpzUE6R3RubusLxTN1Bcaajqv2e9_kOe-GDj13dT0M-YQ" alt="서울">
-        <div class="caption">
-          <p>서울</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="col-sm-3">
-      <div class="thumbnail">
-        <img src="https://encrypted-tbn0.gstatic.com/licensed-image?q=tbn:ANd9GcTRGcTTGFt_2wlhrTMZPD7hPIFt1jeskT--_Vu0vaMZ3Jd8pHw0p-aNPr08O8EplR9uMersnpYj5k9CYsFf4vqgm4xYJSjZoqjL_wDKMQ" alt="부산">
-        <div class="caption">
-          <p>부산</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="col-sm-3">
-      <div class="thumbnail">
-        <img src="https://lh5.googleusercontent.com/p/AF1QipOl8-euekhnvXyoL_zR6AM8E_y2D2HGKPO3ZQLb=w540-h312-n-k-no" alt="광주">
-        <div class="caption">
-          <p>광주</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="col-sm-3">
-      <div class="thumbnail">
-        <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcTTsC0_IudD79eKX8o3jSRnWW9JLmlxFIa3Ypw-ublXlWzbf5b13ZjHASUX9vw8Slvf4G7XYyT1P6wIlim1KoCqvSMdBxWKZGLLnRtwsQ" alt="제주도">
-        <div class="caption">
-          <p>제주도</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
 
 <%@include file="template/footer.jspf" %>
 </body>

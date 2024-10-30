@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
@@ -28,8 +29,8 @@ public class HomeController {
 	public String emp() {
 		return "help/help";
 	}
-	@GetMapping("/intro")
-	public String intro() {
-		return "intro/travle";
+	@GetMapping("/test")
+	public String test() {
+		return "test/test";
 	}
 }
