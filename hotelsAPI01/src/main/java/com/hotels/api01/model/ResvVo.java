@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class ResvVo {
-	int reservation_id,price;
+	int reservation_id,price,guests;
 	String guest_name,hotel_name,room_info,image_url;
 	Date check_in,check_out;
 }

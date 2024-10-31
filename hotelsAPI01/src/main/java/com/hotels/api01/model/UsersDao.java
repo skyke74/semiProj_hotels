@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface UsersDao {
 
-	@Select("SELECT NAME,PASSWORD FROM users WHERE email=#{String}")
+	@Select("SELECT user_id,NAME,PASSWORD FROM users WHERE email=#{String}")
 	UsersVo searchEmail(String email);
 
 	@Insert("INSERT INTO users (NAME,email,PASSWORD,address,birth_date) values (#{name},#{email},#{password},#{address},#{birth_date})")

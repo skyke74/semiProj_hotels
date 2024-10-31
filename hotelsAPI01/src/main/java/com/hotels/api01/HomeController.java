@@ -99,14 +99,25 @@ public class HomeController {
 			return ResponseEntity.ok(tourDao.searchTour(loc_name));
 	}
 	/////////Resv
-	@GetMapping("/hotels/userResv/{user}")
-	public ResponseEntity<?> userResv(@PathVariable String user) {
-		return ResponseEntity.ok(resvDao.pullUserList(user));
+	@GetMapping("/hotels/userResv/{user_id}")
+	public ResponseEntity<?> userResv(@PathVariable int user_id) {
+		return ResponseEntity.ok(resvDao.pullUserList(user_id));
+	}
+	@GetMapping("/hotels/rmResv/{reservation_id}")
+	public ResponseEntity<?> rmResv(@PathVariable int reservation_id) {
+		return ResponseEntity.ok(resvDao.rmResv(reservation_id));
 	}
 	//ResvVo(reservation_id=0, price=0 ,guest_name=null, hotel_name=null, room_info=null, image_url=null, check_in=null, check_out=null)
-	@GetMapping("/hotels/addResv/{hotel_id},{user_name},{checkin},{checkout},{guests}")
-	public ResponseEntity<?> addResv(@PathVariable int hotel_id, @PathVariable String user_name,@PathVariable Date checkin,@PathVariable Date checkout,@PathVariable int guests) {
-		return ResponseEntity.ok(resvDao.addResv(hotel_id, user_name, checkin, checkout, guests));
+	@GetMapping("/hotels/addResv/{hotel_name},{guest_name},{checkin},{checkout},{room_info},{guests},{user_id}")
+	public ResponseEntity<?> addResv(@PathVariable int user_id,@PathVariable String hotel_name, @PathVariable String guest_name,@PathVariable Date checkin,@PathVariable Date checkout,@PathVariable String room_info,@PathVariable int guests) {
+		if(room_info.equals("1")) {
+			return ResponseEntity.ok(resvDao.addResv1(hotel_name, guest_name, checkin, checkout,room_info,guests,user_id));
+		}else if(room_info.equals("2")) {
+			return ResponseEntity.ok(resvDao.addResv2(hotel_name, guest_name, checkin, checkout,room_info,guests,user_id));
+		}else if(room_info.equals("3")) {
+			return ResponseEntity.ok(resvDao.addResv3(hotel_name, guest_name, checkin, checkout,room_info,guests,user_id));
+		}
+		return null;
 	}
 	/////////Fav
 	@GetMapping("/hotels/userFav/{user}")
