@@ -76,9 +76,9 @@
      				return;
      			}else{
      				if('${loc}'==''){
-     					location.href="${root}/re/${list.hotel_id}/${list.hotel_name}/resv";
+     					location.href="${root}/re/${list.hotel_name}/resv";
      				}else{
-	   					location.href="${root}/${list.hotel_id}/${list.hotel_name}/resv?location=${loc}&checkin=${checkin}&checkout=${checkout}&guests=${guests}";
+	   					location.href="${root}/${list.hotel_name}/resv?location=${loc}&checkin=${checkin}&checkout=${checkout}&guests=${guests}";
      				}
      			}
      		});

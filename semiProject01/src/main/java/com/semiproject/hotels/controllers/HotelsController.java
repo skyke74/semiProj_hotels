@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import com.semiproject.hotels.model.DeptVo;
@@ -64,10 +66,9 @@ public class HotelsController {
 		model.addAttribute("list", list);
 		return "hotels/hotel_detail";
 	}
-	@GetMapping("/{hotel_id}/{hotel_name}/resv")
-	public String resv(Model model,@PathVariable int hotel_id,@PathVariable String hotel_name,
+	@GetMapping("/{hotel_name}/resv")
+	public String resv(Model model,@PathVariable String hotel_name,
 			String loc,Date checkin,Date checkout,int guests) {
-		System.out.println(loc+checkin+checkout+guests);
 		model.addAttribute("hotel_name", hotel_name);
 		model.addAttribute("loc", loc);
 		model.addAttribute("checkin", checkin);
@@ -75,16 +76,22 @@ public class HotelsController {
 		model.addAttribute("guests", guests);
 		return "hotels/reserv";
 	}
-	@GetMapping("/re/{hotel_id}/{hotel_name}/resv")
+	@GetMapping("/re/{hotel_name}/resv")
 	public String resv2(Model model,@PathVariable int hotel_id,@PathVariable String hotel_name) {
 		model.addAttribute("hotel_name", hotel_name);
 		return "hotels/reserv";
 	}
-	@GetMapping("/re/{hotel_id}/{hotel_name}/addResv")
-	public String addResv(Model model,@PathVariable int hotel_id,@PathVariable String hotel_name) {
-//		RestTemplate template=new RestTemplate();
-//		int result=template.getForObject(url+"hotels/addFav/user_name="+session.getAttribute("user")+",hotel_id="+hotel_id, int.class);
-		
+	@PostMapping("/{hotel_name}/addResv")
+	public String addResv(HttpSession session, Model model,@PathVariable String hotel_name,@RequestParam Date checkin,@RequestParam Date checkout,@RequestParam int guests,@RequestParam String room_info) {
+		System.out.println("hotel:"+hotel_name);
+		System.out.println("checkin:"+checkin);
+		System.out.println("chechout:"+checkout);
+		System.out.println("guests:"+guests);
+		System.out.println("room_info:"+room_info);
+		RestTemplate template=new RestTemplate();
+		int result=template.getForObject(url+"hotels/addResv/"
+				+hotel_name+","+session.getAttribute("user")+","+checkin+","+checkout+","+room_info+","+guests+","+session.getAttribute("user_id")
+				,int.class);
 		return "redirect:/mypage";
 	}
 	@GetMapping("/hotel_detail/fav")

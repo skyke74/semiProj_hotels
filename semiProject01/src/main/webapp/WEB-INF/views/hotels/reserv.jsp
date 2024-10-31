@@ -12,7 +12,7 @@
         const checkin = document.getElementById("checkin").value;
         const checkout = document.getElementById("checkout").value;
         const guests = document.getElementById("guests").value;
-        const rooms = document.getElementById("rooms").value;
+        const rooms = document.getElementById("room_info").value;
         const terms = document.getElementById("terms").checked;
         const marketing = document.getElementById("marketing").checked;
 
@@ -36,7 +36,7 @@
     function handleSubmit() {
         if (validateForm()) {
             // 모든 검사가 통과되면 로그인 페이지로 이동
-          	$.post('./addResv',$('form').serialize());
+          	$.post('${root}/${hotel_name}/addResv',$('form').serialize());
         }
     }
 </script>
@@ -45,7 +45,7 @@
 <%@include file="../template/menu.jspf" %>
     <div class="signup-container">
         <h2>예약하기</h2>
-        <form action="${root}/addResv" method="post">
+        <form action="${root }/${hotel_name}/addResv" method="post">
             <label for="checkin">호텔 이름</label>
             <label for="checkin">${hotel_name }</label>
 
@@ -58,11 +58,11 @@
             <label for="guests">인원수</label>
             <input type="number" id="guests" name="guests" value="${guests }">
 
-            <label for="rooms">숙소</label>
-            <select id="rooms" name="rooms" required>
-                <option value="room1">디럭스 트리플룸</option>
-                <option value="room2">디럭스 킹 트윈</option>
-                <option value="room3">슈피리어 더블룸</option>
+            <label for="room_info">숙소</label>
+            <select id="room_info" name="room_info" required>
+                <option value="1">디럭스 트리플룸</option>
+                <option value="2">디럭스 킹 트윈</option>
+                <option value="3">슈피리어 더블룸</option>
             </select>
 
             <div class="agreement-section">

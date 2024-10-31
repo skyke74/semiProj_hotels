@@ -23,12 +23,17 @@
 							<p>${bean.hotel_name }</p>
 						</a>
 					</div>
-				<%@include file="../template/modal.jspf"%>
+				<%@include file="./resv_detail.jspf"%>
 				</c:forEach>
 			</div>
 		</div>
 	</div>
-	
+<script type="text/javascript">
+$('.cancel').click(function(e){
+ 	e.preventDefault();
+	 removeResv();
+ });
+</script>
 	<h1>즐겨찾기 </h1>
 	<div class="jumbotron section">
 		<div class="container">
@@ -40,7 +45,6 @@
 							<p>${bean.hotel_name }</p>
 						</a>
 					</div>
-				<%@include file="../template/modal.jspf"%>
 				</c:forEach>
 			</div>
 		</div>

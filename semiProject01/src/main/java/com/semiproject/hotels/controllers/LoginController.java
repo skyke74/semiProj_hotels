@@ -51,6 +51,7 @@ public class LoginController {
 		session.setAttribute("bd", list.getBirth_date());
 		String[] user=email.split("@");
 		session.setAttribute("user", user[0]);
+		session.setAttribute("user_id", list.getUser_id());
 		return "redirect:/mypage";
 	}
 	@GetMapping("logout")
@@ -62,7 +63,7 @@ public class LoginController {
 	public String mypage(Model model,HttpSession session) {
 		String name=(String) session.getAttribute("user");
 		RestTemplate template=new RestTemplate();
-		List<UsersVo> resvList=template.getForObject(url+"hotels/userResv/"+name, List.class);
+		List<UsersVo> resvList=template.getForObject(url+"hotels/userResv/"+session.getAttribute("user_id"), List.class);
 		model.addAttribute("resvList", resvList);
 		List<UsersVo> favList=template.getForObject(url+"hotels/userFav/"+name, List.class);
 		model.addAttribute("favList", favList);
@@ -74,6 +75,14 @@ public class LoginController {
 		RestTemplate template=new RestTemplate();
 		int list=template.getForObject(url+"hotels/addResv/"+bean, int.class);
 		return "redirect:/mypage";
+	}
+	@PostMapping("rmResv/{reservation_id}")
+	public String rmResv(@PathVariable int reservation_id) {
+		System.out.println(reservation_id);
+		RestTemplate template=new RestTemplate();
+		int result=template.getForObject(url+"hotels/rmResv/"+reservation_id, int.class);
+		System.out.println(result);
+		return null;
 	}
 	@GetMapping("signup")
 	public String signup() {
