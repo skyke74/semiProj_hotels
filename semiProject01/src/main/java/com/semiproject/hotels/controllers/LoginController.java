@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
+import com.semiproject.hotels.model.FavVo;
 import com.semiproject.hotels.model.HotelsVo;
 import com.semiproject.hotels.model.ResvVo;
 import com.semiproject.hotels.model.UsersVo;
@@ -61,11 +62,12 @@ public class LoginController {
 	}
 	@GetMapping("mypage")
 	public String mypage(Model model,HttpSession session) {
-		String name=(String) session.getAttribute("user");
+		int user_id=(int) session.getAttribute("user_id");
 		RestTemplate template=new RestTemplate();
-		List<UsersVo> resvList=template.getForObject(url+"hotels/userResv/"+session.getAttribute("user_id"), List.class);
+		List<ResvVo> resvList=template.getForObject(url+"hotels/userResv/"+session.getAttribute("user_id"), List.class);
 		model.addAttribute("resvList", resvList);
-		List<UsersVo> favList=template.getForObject(url+"hotels/userFav/"+name, List.class);
+		
+		List<FavVo> favList=template.getForObject(url+"hotels/userFav/"+user_id, List.class);
 		model.addAttribute("favList", favList);
 		return "my/mypage";
 	}
@@ -102,14 +104,9 @@ public class LoginController {
 	}
 	@PostMapping("changePW/set")
 	public String changePW(HttpSession session,String new_password) {
-		String name=(String) session.getAttribute("user");
-		System.out.println(new_password);
-		UsersVo bean=new UsersVo();
-		bean.setName(name);
-		bean.setPassword(new_password);
-		System.out.println(bean);
+		int user_id=(int) session.getAttribute("user_id");
 		RestTemplate template=new RestTemplate();
-		boolean result=template.getForObject(url+"hotels/editPW/"+bean, boolean.class);
+		boolean result=template.getForObject(url+"hotels/editPW/"+new_password+"."+user_id, boolean.class);
 		if(result) {session.setAttribute("pw", new_password);}
 		return null;
 	}

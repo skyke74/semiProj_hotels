@@ -25,6 +25,13 @@ public class HotelsController {
 	
 	String url="http://localhost:8080/api01/";
 	
+	@GetMapping("/recomm/{type}")
+	public String recommPull(Model model,@PathVariable String type) {
+		RestTemplate template=new RestTemplate();
+		List<HotelsVo> list=template.getForObject(url+"hotels/recomm/"+type, List.class);
+		model.addAttribute("list", list);
+		return "hotels/searchResults";
+	}
 	@GetMapping("/travel/{loc_name}")
 	public String travel(Model model,@PathVariable String loc_name) {
 		model.addAttribute("loc_name", loc_name);
@@ -47,51 +54,60 @@ public class HotelsController {
 		return "hotels/searchResults";
 	}
 	@GetMapping("/hotel_detail/{hotel_id}")
-	public String results(HttpSession session,Model model,@PathVariable int hotel_id,String location,Date checkin,Date checkout,int guests) {
+	public String detail1(HttpSession session,Model model,@PathVariable int hotel_id,String location,Date checkin,Date checkout,int guests) {
+		model.addAttribute("path", "hotel_detail/"+hotel_id);
+		RestTemplate template=new RestTemplate();
+		HotelsVo list=template.getForObject(url+"hotels/searchHotel/hotel_id="+hotel_id+",user_id="+session.getAttribute("user_id"), HotelsVo.class);
+		model.addAttribute("list", list);
 		model.addAttribute("loc", location);
 		model.addAttribute("checkin", checkin);
 		model.addAttribute("checkout", checkout);
 		model.addAttribute("guests", guests);
-		model.addAttribute("path", "hotel_detail/"+hotel_id);
-		RestTemplate template=new RestTemplate();
-		HotelsVo list=template.getForObject(url+"hotels/searchHotel/hotel_id="+hotel_id+",user_name="+session.getAttribute("user"), HotelsVo.class);
-		model.addAttribute("list", list);
 		return "hotels/hotel_detail";
 	}
 	@GetMapping("/hotel_detail/{hotel_id}/re")
-	public String results(HttpSession session,Model model,@PathVariable int hotel_id) {
+	public String detail2(HttpSession session,Model model,@PathVariable int hotel_id) {
 		model.addAttribute("path", "hotel_detail/"+hotel_id);
 		RestTemplate template=new RestTemplate();
-		HotelsVo list=template.getForObject(url+"hotels/searchHotel/hotel_id="+hotel_id+",user_name="+session.getAttribute("user"), HotelsVo.class);
+		HotelsVo list=template.getForObject(url+"hotels/searchHotel/hotel_id="+hotel_id+",user_id="+session.getAttribute("user_id"), HotelsVo.class);
 		model.addAttribute("list", list);
 		return "hotels/hotel_detail";
 	}
-	@GetMapping("/{hotel_name}/resv")
-	public String resv(Model model,@PathVariable String hotel_name,
+	@GetMapping("/{hotel_id}/{hotel_name}/resv")
+	public String resv(Model model,@PathVariable int hotel_id,@PathVariable String hotel_name,String type,int price,int room_count,
 			String loc,Date checkin,Date checkout,int guests) {
 		model.addAttribute("hotel_name", hotel_name);
+		model.addAttribute("hotel_id", hotel_id);
+		model.addAttribute("type", type);
+		model.addAttribute("price", price);
+		model.addAttribute("room_count", room_count);
 		model.addAttribute("loc", loc);
 		model.addAttribute("checkin", checkin);
 		model.addAttribute("checkout", checkout);
 		model.addAttribute("guests", guests);
 		return "hotels/reserv";
 	}
-	@GetMapping("/re/{hotel_name}/resv")
-	public String resv2(Model model,@PathVariable int hotel_id,@PathVariable String hotel_name) {
+	@GetMapping("/re/{hotel_id}/{hotel_name}/resv")
+	public String resv2(Model model,@PathVariable int hotel_id,@PathVariable String hotel_name,String type,int price,int room_count) {
 		model.addAttribute("hotel_name", hotel_name);
+		model.addAttribute("type", type);
+		model.addAttribute("price", price);
+		model.addAttribute("room_count", room_count);
 		return "hotels/reserv";
 	}
-	@PostMapping("/{hotel_name}/addResv")
-	public String addResv(HttpSession session, Model model,@PathVariable String hotel_name,@RequestParam Date checkin,@RequestParam Date checkout,@RequestParam int guests,@RequestParam String room_info) {
-		System.out.println("hotel:"+hotel_name);
-		System.out.println("checkin:"+checkin);
-		System.out.println("chechout:"+checkout);
-		System.out.println("guests:"+guests);
-		System.out.println("room_info:"+room_info);
+	@PostMapping("/{hotel_id}/addResv")
+	public String addResv(HttpSession session, Model model,@PathVariable int hotel_id,@RequestParam String guest_name,@RequestParam int room_count,
+			@RequestParam Date checkin,@RequestParam Date checkout,@RequestParam String room_info,@RequestParam int price) {
+//		System.out.println("guest_name:"+guest_name);
+//		System.out.println("checkin:"+checkin);
+//		System.out.println("chechout:"+checkout);
+//		System.out.println("room_info:"+room_info);
+//		System.out.println("price:"+price);
 		RestTemplate template=new RestTemplate();
 		int result=template.getForObject(url+"hotels/addResv/"
-				+hotel_name+","+session.getAttribute("user")+","+checkin+","+checkout+","+room_info+","+guests+","+session.getAttribute("user_id")
+				+session.getAttribute("user_id")+",guest_name="+guest_name+",checkin="+checkin+",checkout="+checkout+",hotel_id="+hotel_id+",room_info="+room_info+",price="+price
 				,int.class);
+		boolean update=template.getForObject(url+"hotels/update/hotel_id="+hotel_id+",room_info="+room_info+",room_count="+room_count, boolean.class);
 		return "redirect:/mypage";
 	}
 	@GetMapping("/hotel_detail/fav")
@@ -101,13 +117,13 @@ public class HotelsController {
 	@PostMapping("/hotel_detail/{hotel_id}/fav")
 	public String addFav(HttpSession session,Model model,@PathVariable int hotel_id) {
 		RestTemplate template=new RestTemplate();
-		int result=template.getForObject(url+"hotels/addFav/user_name="+session.getAttribute("user")+",hotel_id="+hotel_id, int.class);
+		int result=template.getForObject(url+"hotels/addFav/user_id="+session.getAttribute("user_id")+",hotel_id="+hotel_id, int.class);
 		return "redirect:./re";
 	}
 	@PostMapping("/hotel_detail/{hotel_id}/dis_fav")
 	public String rmFav(HttpSession session,Model model,@PathVariable int hotel_id) {
 		RestTemplate template=new RestTemplate();
-		boolean result=template.getForObject(url+"hotels/rmFav/user_name="+session.getAttribute("user")+",hotel_id="+hotel_id, boolean.class);
+		boolean result=template.getForObject(url+"hotels/rmFav/user_id="+session.getAttribute("user_id")+",hotel_id="+hotel_id, boolean.class);
 		return "redirect:./re";
 	}
 }

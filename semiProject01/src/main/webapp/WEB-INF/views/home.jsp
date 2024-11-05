@@ -66,40 +66,49 @@
 	<div class="jumbotron section" style="background-color: transparent;">
   		<div class="container">
     		<div class="row">
-      			<div class="col-sm-3">
+    		
+      <div class="col-sm-3">
+    	<a href="${root }/recomm/oceanview">
         <div class="thumbnail">
           <img src="https://images.trvl-media.com/lodging/104000000/103090000/103081200/103081161/3a1b0473.jpg?impolicy=resizecrop&rw=1200&ra=fit" alt="오션뷰">
           <div class="caption">
             <p>오션뷰</p>
           </div>
         </div>
+      	</a>
       </div>
 
       <div class="col-sm-3">
+    	<a href="${root }/recomm/indoorpool">
         <div class="thumbnail">
           <img src="https://images.trvl-media.com/lodging/22000000/21520000/21518500/21518483/5e332ca5.jpg?impolicy=resizecrop&rw=1200&ra=fit" alt="수영장">
           <div class="caption">
             <p>실내수영장</p>
           </div>
         </div>
+      	</a>
       </div>
 
       <div class="col-sm-3">
+    	<a href="${root }/recomm/pension">
         <div class="thumbnail">
           <img src="https://images.trvl-media.com/lodging/24000000/23260000/23254100/23254062/15b91d28.jpg?impolicy=resizecrop&rw=1200&ra=fit" alt="펜션">
           <div class="caption">
           <p>펜션</p>
           </div>
         </div>
+      	</a>
       </div>
 
       <div class="col-sm-3">
+    	<a href="${root }/recomm/hanok">
         <div class="thumbnail">
           <img src="https://images.trvl-media.com/lodging/18000000/17870000/17867900/17867897/87b7b69b.jpg?impolicy=resizecrop&rw=1200&ra=fit" alt="한옥">
           <div class="caption">
             <p>한옥</p>
           </div>
         </div>
+     	</a>
       </div>
     </div>
   </div>

@@ -40,10 +40,6 @@
 	        alert("비밀번호는 8글자 이상이어야 합니다!");
 	        return;
 	    }
-
-		var param=$('form').serialize();
-		$.post('login/access',param);
-	    
 	}
 </script>
 </head>

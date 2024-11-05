@@ -32,15 +32,14 @@
 
 <%@include file="../template/search.jspf" %>
     <p class="hotel-info-title">&nbsp;&nbsp;호텔정보</p>
-
     <div class="container"> 
        <div class="section"> 
         	 <div class="title-container">
             <p>&nbsp;&nbsp;${list.hotel_name }</p>
             </div> 
               <div class="image-description">
-                <img alt="${list.hotel_name }" src="https://images.trvl-media.com/lodging/16000000/15540000/15536400/15536302/4f84a9a9.jpg?impolicy=resizecrop&rw=1200&ra=fit">
-               	<img alt="" src="https://images.trvl-media.com/lodging/16000000/15540000/15536400/15536302/3edbeeb8.jpg?impolicy=resizecrop&rw=1200&ra=fit">
+                <img alt="${list.hotel_name }" src="${list.image_url2 }">
+                <img alt="${list.hotel_name }" src="${list.image_url3 }">
                 <div class="description-text"> 
                 	 
                     <h1><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;편의시설/서비스</h1>
@@ -56,10 +55,9 @@
                 </div>
                 
                  <div class="description-text2">
-                    <h1><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><a class="resv" type="button"> 예약하기</a></h1>  
                     <h1><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                     	<c:choose>
-                    		<c:when test='${list.user_name eq sessionScope.user && !empty list.user_name}'>
+                    		<c:when test='${list.user_id eq sessionScope.user_id && list.user_id>0}'>
 	                    		<a class="fav_del" type="button"> 즐겨찾기 취소</a>
 	                    	</c:when>
 	                    	<c:otherwise>
@@ -70,18 +68,6 @@
                 </div>
             </div>
      	<script type="text/javascript">
-     		$('.resv').click(function(e){
-     			if('${sessionScope.user}'==''){
-	     			alert("로그인 후 예약이 가능합니다.");
-     				return;
-     			}else{
-     				if('${loc}'==''){
-     					location.href="${root}/re/${list.hotel_name}/resv";
-     				}else{
-	   					location.href="${root}/${list.hotel_name}/resv?location=${loc}&checkin=${checkin}&checkout=${checkout}&guests=${guests}";
-     				}
-     			}
-     		});
      		$('.fav').click(function(e){
      			if('${sessionScope.user}'==''){
 	     			alert("로그인 후 즐겨찾기가 가능합니다.");
@@ -122,7 +108,6 @@
             <p>한눈에 살펴보기</p> 
              </div>    
                     <div class="description-text3">
-                    <p><span class="glyphicon glyphicon-check" aria-hidden="true"></span>&nbsp;호텔규모</p>
                     <p><span class="glyphicon glyphicon-check" aria-hidden="true"></span>&nbsp;체크인/체크아웃</p>
                     <h2>&nbsp;&nbsp;&nbsp;체크인 시간은 15:00 , 체크아웃 시간은 11:00</h1>   
                      <p><span class="glyphicon glyphicon-check" aria-hidden="true"></span>&nbsp;반려동물</p>
@@ -135,14 +120,15 @@
          <div class="rooms">
          	<div class="room1">   
               <div class="image-description">
-                <img alt="디럭스 트리플" src="https://images.trvl-media.com/lodging/16000000/15540000/15536400/15536302/ce1b3dfd.jpg?impolicy=fcrop&w=1200&h=800&p=1&q=medium">
+                <img alt="프리미엄 룸" src="${list.image_urlp }">
                     <div class="description-text">
-	                    <p>&nbsp; 디럭스 트리플룸</p>
+	                    <p>&nbsp; 프리미엄 룸</p>
 	                    <h1>&nbsp;면적: 46㎡ &nbsp;무료 Wi-Fi</h1>                  
 	                    <h1><span class="glyphicon glyphicon-bed" aria-hidden="true"></span>&nbsp;퀸사이즈침대 3개</h1>
 	                    <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;6명</h1>  
 	                    <h1>가격: &#8361;${list.premium_price }</h1>
 	                    <p>현재 ${list.premium_r }개의 방이 예약 가능합니다.</p>
+                    	<h1><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><a class="resv resv_p" type="button"> 예약하기</a></h1>  
 	                    <h1>주요특징</h1>
 	                    <h2>&nbsp; 방음 설비&nbsp; 에어컨&nbsp; TV &nbsp;헤어드라이어 &nbsp; 전용 욕실 &nbsp; 무료 생수</h2>
                		</div>
@@ -151,14 +137,15 @@
                 
          	<div class="room2">
                 <div class="image-description">
-                <img alt="디럭스 킹" src="https://images.trvl-media.com/lodging/16000000/15540000/15536400/15536302/8942deb2.jpg?impolicy=fcrop&w=1200&h=800&p=1&q=medium">
+                <img alt="디럭스 룸" src="${list.image_urld }">
                     <div class="description-text">
-	                    <p>&nbsp; 디럭스 킹 트윈</p>
+	                    <p>&nbsp; 디럭스 룸</p>
 	                    <h1>&nbsp;면적: 33㎡ &nbsp;무료 Wi-Fi</h1>                  
-	                    <h1><span class="glyphicon glyphicon-bed-sleeping" aria-hidden="true"></span>&nbsp;킹사이즈침대 2개</h1>
+	                    <h1><span class="glyphicon glyphicon-bed" aria-hidden="true"></span>&nbsp;킹사이즈침대 2개</h1>
 	                    <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;4명</h1>  
 	                    <h1>가격: &#8361;${list.deluxe_price }</h1>
 	                    <p>현재 ${list.deluxe_r }개의 방이 예약 가능합니다.</p>
+                    	<h1><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><a class="resv resv_d" type="button"> 예약하기</a></h1>  
 	                    <h1>주요특징</h1>
 	                    <h2>&nbsp; 방음 설비&nbsp; 에어컨&nbsp; TV &nbsp;헤어드라이어 &nbsp; 전용 욕실 &nbsp; 무료 생수</h2>            
                 	</div>
@@ -167,14 +154,15 @@
             
          	<div class="room3">
                 <div class="image-description">
-                <img alt="슈피" src="https://images.trvl-media.com/lodging/16000000/15540000/15536400/15536302/5d0c3bff.jpg?impolicy=fcrop&w=1200&h=800&p=1&q=medium">
+                <img alt="스탠다드 룸" src="${list.image_urls }">
                     <div class="description-text">
-	                    <p>&nbsp; 슈피리어 더블룸</p>
+	                    <p>&nbsp; 스탠다드 룸</p>
 	                    <h1>&nbsp;면적: 27㎡ &nbsp;무료 Wi-Fi</h1>                  
-	                    <h1><span class="glyphicon glyphicon-bed-sleeping" aria-hidden="true"></span>&nbsp;싱글침대 1개</h1>
+	                    <h1><span class="glyphicon glyphicon-bed" aria-hidden="true"></span>&nbsp;싱글침대 1개</h1>
 	                    <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;2명</h1>  
 	                    <h1>가격: &#8361;${list.standard_price }</h1>
 	                    <p>현재 ${list.standard_r }개의 방이 예약 가능합니다.</p>
+                    	<h1><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><a href="#" class="resv_s" type="button"> 예약하기</a></h1>  
 	                    <h1>주요특징</h1>
 	                    <h2>&nbsp; 방음 설비&nbsp; 에어컨&nbsp; TV &nbsp;헤어드라이어 &nbsp; 전용 욕실 &nbsp; 무료 생수</h2>            
 	                </div>
@@ -186,6 +174,44 @@
 	            </div>
             </div>           
        	</div>
+    <script type="text/javascript">
+		$('.resv_s').click(function(e){
+			if('${sessionScope.user}'==''){
+	   			alert("로그인 후 예약이 가능합니다.");
+				return;
+			}else{
+				if('${loc}'==''){
+					location.href="${root}/re/${list.hotel_id}/${list.hotel_name}/resv?type=스탠다드 룸&price=${list.standard_price} &room_count=${list.standard_r }";
+				}else{
+	 				location.href="${root}/${list.hotel_id}/${list.hotel_name}/resv?type=스탠다드 룸&price=${list.standard_price }&room_count= ${list.standard_r }&location=${loc}&checkin=${checkin}&checkout=${checkout}&guests=${guests}";
+				}
+			}
+		});
+		$('.resv_d').click(function(e){
+			if('${sessionScope.user}'==''){
+	   			alert("로그인 후 예약이 가능합니다.");
+				return;
+			}else{
+				if('${loc}'==''){
+					location.href="${root}/re/${list.hotel_id}/${list.hotel_name}/resv?type=디럭스 룸&price=${list.deluxe_price }&room_count=${list.deluxe_r }";
+				}else{
+	 				location.href="${root}/${list.hotel_id}/${list.hotel_name}/resv?type=디럭스 룸&price=${list.deluxe_price }&room_count=${list.deluxe_r }&location=${loc}&checkin=${checkin}&checkout=${checkout}&guests=${guests}";
+				}
+			}
+		});
+		$('.resv_p').click(function(e){
+			if('${sessionScope.user}'==''){
+	   			alert("로그인 후 예약이 가능합니다.");
+				return;
+			}else{
+				if('${loc}'==''){
+					location.href="${root}/re/${list.hotel_id}/${list.hotel_name}/resv?type=프리미엄 룸&price=${list.premium_price }&room_count=${list.premium_r }";
+				}else{
+	 				location.href="${root}/${list.hotel_id}/${list.hotel_name}/resv?type=프리미엄 룸&price=${list.premium_price }&room_count=${list.premium_r }&location=${loc}&checkin=${checkin}&checkout=${checkout}&guests=${guests}";
+				}
+			}
+		});
+    </script>
             
             <div class="title-container">
             <p>요금 및 정책</p> 
@@ -217,5 +243,6 @@
     	}
     	
     </script>
+    
 </body>
 </html>

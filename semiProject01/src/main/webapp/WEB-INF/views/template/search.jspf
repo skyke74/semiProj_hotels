@@ -7,7 +7,7 @@
 <div class="jumbotron">
    	<form action="${root }/${path}" method="get" style="text-align: center;">
         <label for="location">위치:</label>
-        <select id="location" name="location" required>   
+        <select id="location" name="location" required>
 		<%@page import="java.util.*" %>
         <%
 	        ArrayList list=new ArrayList();

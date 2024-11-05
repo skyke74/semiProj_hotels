@@ -19,7 +19,7 @@
 				<c:forEach items="${resvList }" var="bean">
 					<div class="col-xs-6 col-md-3">
 						<a data-toggle="modal" data-target="#myModal" class="thumbnail">
-							<img src="${bean.image_url }" alt="${bean.hotel_name} ">
+							<img src="${bean.image_url1 }" alt="${bean.hotel_name} ">
 							<p>${bean.hotel_name }</p>
 						</a>
 					</div>
@@ -40,8 +40,8 @@ $('.cancel').click(function(e){
 			<div class="row">
 				<c:forEach items="${favList }" var="bean">
 					<div class="col-xs-6 col-md-3">
-						<a href="hotel_detail/${bean.hotel_id }/re" class="thumbnail">
-							<img src="${bean.image_url }" alt="${bean.hotel_name} ">
+						<a href="hotel_detail/${bean.hotel_id }" class="thumbnail">
+							<img src="${bean.image_url1 }" alt="${bean.hotel_name} ">
 							<p>${bean.hotel_name }</p>
 						</a>
 					</div>

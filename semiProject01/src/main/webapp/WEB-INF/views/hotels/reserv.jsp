@@ -11,13 +11,12 @@
     function validateForm() {
         const checkin = document.getElementById("checkin").value;
         const checkout = document.getElementById("checkout").value;
-        const guests = document.getElementById("guests").value;
-        const rooms = document.getElementById("room_info").value;
+        const guest_name = document.getElementById("guest_name").value;
         const terms = document.getElementById("terms").checked;
         const marketing = document.getElementById("marketing").checked;
 
         // 각 필드가 비어 있는지 확인
-        if (!guests || !checkin || !checkout || !rooms) {
+        if (!guest_name || !checkin || !checkout) {
             alert("모든 정보를 작성하세요");
             return false;
         }
@@ -31,23 +30,27 @@
         // 모든 검사를 통과하면 true 반환
         return true;
     }
-
-    // 확인 버튼 클릭 시 폼 유효성 검사
-    function handleSubmit() {
-        if (validateForm()) {
-            // 모든 검사가 통과되면 로그인 페이지로 이동
-          	$.post('${root}/${hotel_name}/addResv',$('form').serialize());
-        }
-    }
 </script>
 </head>
 <body>
 <%@include file="../template/menu.jspf" %>
     <div class="signup-container">
         <h2>예약하기</h2>
-        <form action="${root }/${hotel_name}/addResv" method="post">
+        <form action="${root }/${hotel_id}/addResv" method="post">
             <label for="checkin">호텔 이름</label>
             <label for="checkin">${hotel_name }</label>
+            
+            <label for="checkin">방 타입</label>
+            <label for="checkin">${type }</label>
+            <input type="text"  id="room_info" name="room_info" value="${type }" hidden >
+            
+            <label for="checkin">가격</label>
+            <label for="checkin">&#8361;${price }</label>
+            <input type="number"  id="price" name="price" value="${price }" hidden >
+            <input type="number"  id="room_count" name="room_count" value="${room_count }" hidden >
+            
+            <label for="guest_name">이름</label>
+            <input type="text" id="guest_name" name="guest_name" >
 
             <label for="checkin">체크인</label>
             <input type="date" id="checkin" name="checkin" required min="2024-01-01" max="2025-12-31" value="${checkin }">
@@ -55,15 +58,6 @@
             <label for="checkout">체크아웃</label>
             <input type="date" id="checkout" name="checkout" required min="2024-01-01" max="2025-12-31" value="${checkout }">
 
-            <label for="guests">인원수</label>
-            <input type="number" id="guests" name="guests" value="${guests }">
-
-            <label for="room_info">숙소</label>
-            <select id="room_info" name="room_info" required>
-                <option value="1">디럭스 트리플룸</option>
-                <option value="2">디럭스 킹 트윈</option>
-                <option value="3">슈피리어 더블룸</option>
-            </select>
 
             <div class="agreement-section">
                 <label class="checkbox-label">
@@ -87,7 +81,7 @@
     <script type="text/javascript">
     $('form').one('submit',e=>{
     	e.preventDefault();
-    	handleSubmit();
+    	validateForm();
     });
     </script>
 </body>

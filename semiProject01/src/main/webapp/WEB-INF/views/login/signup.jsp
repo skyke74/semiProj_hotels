@@ -46,22 +46,13 @@
 	    return true;
 	}
 	
-	// 확인 버튼 클릭 시 폼 유효성 검사
-	function handleSubmit() {
-	    if (validateForm()) {
-	        // 모든 검사가 통과되면 로그인 페이지로 이동
-	
-			var param=$('form').serialize();
-			$.post('signup/new',param);
-	    }
-	}
 </script>
 </head>
 <body>
 <%@include file="../template/menu.jspf" %>
     <div class="signup-container">
         <h2>회원가입</h2>
-        <form>
+        <form action="${root}/signup/new" method="post">
             <label for="name">이름</label>
             <input type="text" id="name" name="name" required>
 
@@ -104,8 +95,7 @@
     </div>
 <script type="text/javascript">
 $('form').one('submit',e=>{
-	e.preventDefault();
-	handleSubmit();
+	validateForm();
 });
 </script>
 </body>

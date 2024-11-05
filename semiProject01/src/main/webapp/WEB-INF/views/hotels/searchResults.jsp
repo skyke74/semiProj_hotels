@@ -19,8 +19,9 @@
             <p>${loc }</p>
             </div> 		
 			<c:forEach items="${list }" var="bean">
+			<c:set var="loc" value="?location=${loc }&checkin=${checkin }&checkout=${checkout }&guests=${guests }"/>
 	            <div class="image-description">
-	                <img alt="${bean.hotel_name }" src="${bean.image_url }">
+	                <img alt="${bean.hotel_name }" src="${bean.image_url1 }">
 	                <div class="description-text">
                    		<p>&nbsp;${bean.hotel_name }</p>
 	                    <h1><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;편의시설/서비스</h1>
@@ -31,7 +32,7 @@
 	                    </h2>                
 	                    <h1><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;주소 : ${bean.address }</h1>
 	                    <h1><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>&nbsp;전화번호: ${bean.contact_number }</h1>
-	                    <h1><a href="hotel_detail/${bean.hotel_id }?location=${loc}&checkin=${checkin}&checkout=${checkout}&guests=${guests}" type="button">자세히 보기</a></h1>
+	                    <h1><a href="${root}/hotel_detail/${bean.hotel_id }${guests eq '' || empty guests? '/re' : loc}" class="detail" type="button">자세히 보기</a></h1>
                 	</div>
             	</div>
 			</c:forEach>
