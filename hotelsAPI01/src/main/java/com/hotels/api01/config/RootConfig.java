@@ -28,7 +28,7 @@ public class RootConfig {
 //		BasicDataSource dataSource=new BasicDataSource();
 		DriverManagerDataSource dataSource=new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/xe");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/hotels");
 		dataSource.setUsername("scott");
 		dataSource.setPassword("tiger");
 		return dataSource;

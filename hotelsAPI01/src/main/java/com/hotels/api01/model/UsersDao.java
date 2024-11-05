@@ -17,6 +17,6 @@ public interface UsersDao {
 	@Insert("INSERT INTO users (NAME,email,PASSWORD,address,birth_date) values (#{name},#{email},#{password},#{address},#{birth_date})")
 	int addUser(UsersVo bean);
 	
-	@Update("UPDATE users SET PASSWORD=#{password} WHERE NAME=#{name};")
-	boolean editPassword(UsersVo bean);
+	@Update("UPDATE users SET PASSWORD=#{arg0} WHERE user_id=#{arg1};")
+	boolean editPassword(String pw,int user_id);
 }

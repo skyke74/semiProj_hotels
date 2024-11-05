@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 public class UsersVo {
 	int user_id;
 	String name,email,password,address;
-	Date birth_date;
+	Date birth_date,check_in,check_out;
 }

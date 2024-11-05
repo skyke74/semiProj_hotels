@@ -11,88 +11,182 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface HotelsDao {
 
-	@Select("SELECT H.hotel_id, H.hotel_name, L.loc_name, H.star_rating, H.price_per_night, H.room_count, H.contact_number,\n" + 
-			"       H.address, GROUP_CONCAT(A.amenity_name SEPARATOR ', ') AS amenities, H.image_url, H.homepage_url\n" + 
-			"FROM Hotels H\n" + 
-			"JOIN HotelAmenities HA ON H.hotel_id = HA.hotel_id\n" + 
-			"JOIN Amenities A ON HA.amenity_id = A.amenity_id\n" + 
-			"JOIN Location L ON H.loc_id = L.loc_id\n" + 
-			"GROUP BY H.hotel_id, H.hotel_name, L.loc_name, H.star_rating, H.price_per_night, H.room_count, H.contact_number, H.address, H.image_url, H.homepage_url;")
+	@Select("SELECT H.hotel_id, H.hotel_name, L.loc_name, H.star_rating, H.contact_number,\n" + 
+			"			H.address, GROUP_CONCAT(A.amenity_name SEPARATOR ', ') AS amenities, H.image_url1, H.image_url2, H.image_url3, H.homepage_url\n" + 
+			"			FROM Hotels H\n" + 
+			"			JOIN HotelAmenities HA ON H.hotel_id = HA.hotel_id\n" + 
+			"			JOIN Amenities A ON HA.amenity_id = A.amenity_id\n" + 
+			"			JOIN Location L ON H.loc_id = L.loc_id\n" + 
+			"			GROUP BY H.hotel_id, H.hotel_name, L.loc_name, H.star_rating, H.contact_number, H.address, H.image_url1, H.image_url2, H.image_url3, H.homepage_url;")
 	List<HotelsVo> pullList();
 
 	@Select("SELECT \n" + 
-			"    H.hotel_id, \n" + 
-			"    H.hotel_name, \n" + 
-			"    L.loc_name,   \n" + 
-			"    H.contact_number, \n" + 
-			"    H.address, \n" + 
-			"    GROUP_CONCAT(A.amenity_name SEPARATOR ', ') AS amenities, \n" + 
-			"    H.image_url, \n" + 
-			"    H.homepage_url,\n" + 
-			"    f.user_name            \n" + 
-			"FROM Hotels H\n" + 
-			"JOIN HotelAmenities HA ON H.hotel_id = HA.hotel_id\n" + 
-			"JOIN Amenities A ON HA.amenity_id = A.amenity_id\n" + 
-			"JOIN Location L ON H.loc_id = L.loc_id\n" + 
-			"LEFT JOIN favorites f ON H.hotel_id = f.hotel_id  \n" + 
-			"LEFT JOIN users u ON f.user_name = u.name WHERE L.loc_name=#{String}\n" + 
-			"GROUP BY H.hotel_id,\n" + 
-			"         f.user_name,\n" + 
-			"         H.hotel_name, \n" + 
-			"         L.loc_name, \n" + 
-			"         H.contact_number, \n" + 
-			"         H.address, \n" + 
-			"         H.image_url, \n" + 
-			"         H.homepage_url")
+			"			    H.hotel_id, \n" + 
+			"			    H.hotel_name, \n" + 
+			"			    L.loc_name,  \n" + 
+			"			    H.contact_number, \n" + 
+			"			    H.address,\n" + 
+			"			    GROUP_CONCAT(A.amenity_name SEPARATOR ', ') AS amenities,\n" + 
+			"			    H.image_url1, \n" + 
+			"			    H.image_url2, \n" + 
+			"			    H.image_url3, \n" + 
+			"			    H.homepage_url, \n" + 
+			"			    f.user_id           \n" + 
+			"			FROM Hotels H\n" + 
+			"			JOIN HotelAmenities HA ON H.hotel_id = HA.hotel_id\n" + 
+			"			JOIN Amenities A ON HA.amenity_id = A.amenity_id\n" + 
+			"			JOIN Location L ON H.loc_id = L.loc_id \n" + 
+			"			LEFT JOIN favorites f ON H.hotel_id = f.hotel_id \n" + 
+			"			LEFT JOIN users u ON f.user_id = u.user_id WHERE L.loc_name=#{String}\n" + 
+			"			GROUP BY H.hotel_id,\n" + 
+			"			         f.user_id,\n" + 
+			"			         H.hotel_name,  \n" + 
+			"			         L.loc_name, \n" + 
+			"			         H.contact_number,  \n" + 
+			"			         H.address, \n" + 
+			"			         H.image_url1, \n" + 
+			"			         H.image_url2, \n" + 
+			"			         H.image_url3, \n" + 
+			"			         H.homepage_url")
 	List<HotelsVo> searchList(String loc);
 	
+	@Select("SELECT \n" + 
+			"			    H.hotel_id, \n" + 
+			"			    H.hotel_name, \n" + 
+			"			    L.loc_name,  \n" + 
+			"			    H.contact_number, \n" + 
+			"			    H.address,\n" + 
+			"			    GROUP_CONCAT(A.amenity_name SEPARATOR ', ') AS amenities,\n" + 
+			"			    H.image_url1, \n" + 
+			"			    H.image_url2, \n" + 
+			"			    H.image_url3, \n" + 
+			"			    H.homepage_url, \n" + 
+			"			    f.user_id           \n" + 
+			"			FROM Hotels H\n" + 
+			"			JOIN HotelAmenities HA ON H.hotel_id = HA.hotel_id\n" + 
+			"			JOIN Amenities A ON HA.amenity_id = A.amenity_id\n" + 
+			"			JOIN Location L ON H.loc_id = L.loc_id \n" + 
+			"			LEFT JOIN favorites f ON H.hotel_id = f.hotel_id \n" + 
+			"			LEFT JOIN users u ON f.user_id = u.user_id WHERE H.typeH=#{String}\n" + 
+			"			GROUP BY H.hotel_id,\n" + 
+			"			         f.user_id,\n" + 
+			"			         H.hotel_name,  \n" + 
+			"			         L.loc_name, \n" + 
+			"			         H.contact_number,  \n" + 
+			"			         H.address, \n" + 
+			"			         H.image_url1, \n" + 
+			"			         H.image_url2, \n" + 
+			"			         H.image_url3, \n" + 
+			"			         H.homepage_url")
+	List<HotelsVo> searchType(String type);
+	
+	@Select("SELECT \n" + 
+			"			    H.hotel_id, \n" + 
+			"			    H.hotel_name, \n" + 
+			"			    L.loc_name, \n" + 
+			"			    H.star_rating,  \n" + 
+			"			    H.standard_price,      \n" + 
+			"			    H.deluxe_price,          \n" + 
+			"			    H.premium_price,         \n" + 
+			"			    H.standard_r,  \n" + 
+			"			    H.deluxe_r,      \n" + 
+			"			    H.premium_r,     \n" + 
+			"			    H.contact_number, \n" + 
+			"			    H.address, \n" + 
+			"			    GROUP_CONCAT(A.amenity_name SEPARATOR ', ') AS amenities,\n" + 
+			"			    H.image_url1, \n" + 
+			"			    H.image_url2, \n" + 
+			"			    H.image_url3, \n" + 
+			"			    H.image_urls, \n" + 
+			"			    H.image_urlp, \n" + 
+			"			    H.image_urld, \n" + 
+			"			    H.homepage_url,\n" + 
+			"			    f.user_id         \n" + 
+			"			FROM Hotels H \n" + 
+			"			JOIN HotelAmenities HA ON H.hotel_id = HA.hotel_id\n" + 
+			"			JOIN Amenities A ON HA.amenity_id = A.amenity_id\n" + 
+			"			JOIN Location L ON H.loc_id = L.loc_id\n" + 
+			"			LEFT JOIN favorites f ON H.hotel_id = f.hotel_id \n" + 
+			"			LEFT JOIN users u ON f.user_id = u.user_id WHERE H.hotel_id=#{arg0}\n" + 
+			"			GROUP BY H.hotel_id, \n" + 
+			"			         f.user_id,\n" + 
+			"			         H.hotel_name, \n" + 
+			"			         L.loc_name, \n" + 
+			"			         H.star_rating, \n" + 
+			"			         H.standard_price,  \n" + 
+			"			         H.deluxe_price, \n" + 
+			"			         H.premium_price, \n" + 
+			"			         H.standard_r, \n" + 
+			"			         H.deluxe_r, \n" + 
+			"			         H.premium_r, \n" + 
+			"			         H.contact_number, \n" + 
+			"			         H.address, \n" + 
+			"			         H.image_url1, \n" + 
+			"			         H.image_url2, \n" + 
+			"			         H.image_url3, \n" + 
+			"			    	 H.image_urls, \n" + 
+			"			    	 H.image_urlp, \n" + 
+			"			    	 H.image_urld, \n" + 
+			"			         H.homepage_url")
+	HotelsVo searchHotel(int hotel_id);
+	
 	@Select("SELECT * FROM (\n" + 
-			"SELECT \n" + 
-			"    H.hotel_id, \n" + 
-			"    H.hotel_name, \n" + 
-			"    L.loc_name, \n" + 
-			"    H.star_rating, \n" + 
-			"    H.standard_price,           \n" + 
-			"    H.deluxe_price,             \n" + 
-			"    H.premium_price,            \n" + 
-			"    H.standard_r AS standard_room_count,  \n" + 
-			"    H.deluxe_r AS deluxe_room_count,      \n" + 
-			"    H.premium_r AS premium_room_count,     \n" + 
-			"    H.contact_number, \n" + 
-			"    H.address, \n" + 
-			"    GROUP_CONCAT(A.amenity_name SEPARATOR ', ') AS amenities, \n" + 
-			"    H.image_url, \n" + 
-			"    H.homepage_url,\n" + 
-			"    f.user_name            \n" + 
-			"FROM Hotels H\n" + 
-			"JOIN HotelAmenities HA ON H.hotel_id = HA.hotel_id\n" + 
-			"JOIN Amenities A ON HA.amenity_id = A.amenity_id\n" + 
-			"JOIN Location L ON H.loc_id = L.loc_id\n" + 
-			"LEFT JOIN favorites f ON H.hotel_id = f.hotel_id  \n" + 
-			"LEFT JOIN users u ON f.user_name = u.name WHERE H.hotel_id=#{arg0}\n" + 
-			"GROUP BY H.hotel_id,\n" + 
-			"         f.user_name,\n" + 
-			"         H.hotel_name, \n" + 
-			"         L.loc_name, \n" + 
-			"         H.star_rating, \n" + 
-			"         H.standard_price, \n" + 
-			"         H.deluxe_price, \n" + 
-			"         H.premium_price, \n" + 
-			"         H.standard_r, \n" + 
-			"         H.deluxe_r, \n" + 
-			"         H.premium_r, \n" + 
-			"         H.contact_number, \n" + 
-			"         H.address, \n" + 
-			"         H.image_url, \n" + 
-			"         H.homepage_url) SE \n" + 
-			"			WHERE SE.user_name=#{arg1} or SE.user_name IS null\n" + 
-			"			;")
-	HotelsVo searchHotel(int hotel_id,String user_name);
+			"			SELECT \n" + 
+			"			    H.hotel_id, \n" + 
+			"			    H.hotel_name, \n" + 
+			"			    L.loc_name, \n" + 
+			"			    H.star_rating,  \n" + 
+			"			    H.standard_price,      \n" + 
+			"			    H.deluxe_price,          \n" + 
+			"			    H.premium_price,         \n" + 
+			"			    H.standard_r,  \n" + 
+			"			    H.deluxe_r,      \n" + 
+			"			    H.premium_r,     \n" + 
+			"			    H.contact_number, \n" + 
+			"			    H.address, \n" + 
+			"			    GROUP_CONCAT(A.amenity_name SEPARATOR ', ') AS amenities,\n" + 
+			"			    H.image_url1, \n" + 
+			"			    H.image_url2, \n" + 
+			"			    H.image_url3,\n" + 
+			"			         H.image_urls, \n" + 
+			"			         H.image_urlp, \n" + 
+			"			         H.image_urld,  \n" + 
+			"			    H.homepage_url,\n" + 
+			"			    f.user_id         \n" + 
+			"			FROM Hotels H \n" + 
+			"			JOIN HotelAmenities HA ON H.hotel_id = HA.hotel_id\n" + 
+			"			JOIN Amenities A ON HA.amenity_id = A.amenity_id\n" + 
+			"			JOIN Location L ON H.loc_id = L.loc_id\n" + 
+			"			LEFT JOIN favorites f ON H.hotel_id = f.hotel_id \n" + 
+			"			LEFT JOIN users u ON f.user_id = u.user_id WHERE H.hotel_id=#{arg0}\n" + 
+			"			GROUP BY H.hotel_id, \n" + 
+			"			         f.user_id,\n" + 
+			"			         H.hotel_name, \n" + 
+			"			         L.loc_name, \n" + 
+			"			         H.star_rating, \n" + 
+			"			         H.standard_price,  \n" + 
+			"			         H.deluxe_price, \n" + 
+			"			         H.premium_price, \n" + 
+			"			         H.standard_r, \n" + 
+			"			         H.deluxe_r, \n" + 
+			"			         H.premium_r, \n" + 
+			"			         H.contact_number, \n" + 
+			"			         H.address, \n" + 
+			"			         H.image_url1, \n" + 
+			"			         H.image_url2, \n" + 
+			"			         H.image_url3,\n" + 
+			"			         H.image_urls, \n" + 
+			"			         H.image_urlp, \n" + 
+			"			         H.image_urld,  \n" + 
+			"			         H.homepage_url) SE \n" + 
+			"						WHERE SE.user_id=#{arg1} or SE.user_id IS null")
+	HotelsVo searchHotelUser(int hotel_id,int user_id);
 	
-	@Select("SELECT H.hotel_id, H.hotel_name, L.loc_name, d.d241001\n" + 
-			"FROM Hotels H\n" + 
-			"JOIN date d ON h.hotel_id = d.hotel_id \n" + 
-			"JOIN Location L ON H.loc_id = L.loc_id WHERE L.loc_name=\"¼­¿ï\";")
-	List<HotelsVo> searchRooms();
-	
+	@Update("UPDATE hotels SET standard_r=#{arg1} WHERE hotel_id=#{arg1};")
+	boolean updateStandardCount(int hotel_id,int roomcount);
+	@Update("UPDATE hotels SET deluxe_r=#{arg1} WHERE hotel_id=#{arg1};")
+	boolean updateDeluxCount(int hotel_id,int roomcount);
+	@Update("UPDATE hotels SET premium_r=#{arg1} WHERE hotel_id=#{arg1};")
+	boolean updatePremiumCount(int hotel_id,int roomcount);
 }
+	

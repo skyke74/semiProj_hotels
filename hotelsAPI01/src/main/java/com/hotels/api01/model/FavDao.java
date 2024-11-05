@@ -11,18 +11,15 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface FavDao {
 
-	@Select("SELECT F.user_name,H.hotel_name,F.hotel_id,H.image_url FROM favorites f\n" + 
-			"JOIN hotels H ON H.hotel_id=F.hotel_id WHERE user_name=#{String}")
-	List<FavVo> pullUserList(String user);
+	@Select("SELECT F.user_id,H.hotel_name,F.hotel_id,H.image_url1, H.image_url2, H.image_url3 FROM favorites f\n" + 
+			"			JOIN hotels H ON H.hotel_id=F.hotel_id WHERE user_id=#{int}")
+	List<FavVo> pullUserList(int user_id);
 	
-	@Insert("INSERT INTO favorites (user_name,hotel_id) VALUES\n" + 
+	@Insert("INSERT INTO favorites (user_id,hotel_id) VALUES\n" + 
 			"	(#{arg0},#{arg1})")
-	int addFav(String user_id,int hotel_id);
+	int addFav(int user_id,int hotel_id);
 	
-	@Select("SELECT * FROM fav WHERE user_name=#{arg0} AND hotel_id=#{arg1}")
-	List<FavVo> searchFav(String user_name,int hotel_id);
-	
-	@Delete("DELETE FROM favorites WHERE user_name=#{arg0} AND hotel_id=#{arg1}")
-	boolean rmFav(String user_name,int hotel_id);
+	@Delete("DELETE FROM favorites WHERE user_id=#{arg0} AND hotel_id=#{arg1}")
+	boolean rmFav(int user_id,int hotel_id);
 
 }

@@ -49,6 +49,7 @@ public class HomeController {
 //	public ResponseEntity<?> home() {
 //		return ResponseEntity.ok(deptDao.pullList());
 //	}
+	// HOTELS
 	@GetMapping("/hotels/list/")
 	public ResponseEntity<?> hotels() {
 		return ResponseEntity.ok(hotelsDao.pullList());
@@ -57,10 +58,20 @@ public class HomeController {
 	public ResponseEntity<?> search(@PathVariable String loc) {
 		return ResponseEntity.ok(hotelsDao.searchList(loc));
 	}
-	@GetMapping("/hotels/searchHotel/hotel_id={hotel_id},user_name={user_name}")
-	public ResponseEntity<?> searchOne(@PathVariable int hotel_id,@PathVariable String user_name) {
-		return ResponseEntity.ok(hotelsDao.searchHotel(hotel_id,user_name));
+	@GetMapping("/hotels/searchHotel/hotel_id={hotel_id},user_id={user_id}")
+	public ResponseEntity<?> searchOne(@PathVariable int hotel_id,@PathVariable String user_id) {
+		if(user_id.equals("null")) {
+			return ResponseEntity.ok(hotelsDao.searchHotel(hotel_id));
+		}else {
+			return ResponseEntity.ok(hotelsDao.searchHotelUser(hotel_id,Integer.parseInt(user_id)));
+		}
 	}
+	@GetMapping("/hotels/recomm/{type}")
+	public ResponseEntity<?> pullRecomm(@PathVariable String type){
+		return ResponseEntity.ok(hotelsDao.searchType(type));
+	}
+	
+	// USER
 	@GetMapping("/hotels/searchEmail/{email}")
 	public ResponseEntity<?> searchUser(@PathVariable String email) {
 		return ResponseEntity.ok(usersDao.searchEmail(email));
@@ -75,19 +86,16 @@ public class HomeController {
 		bean.setEmail(email);
 		bean.setPassword(password);
 		bean.setAddress(address);
-		String[] date=birth_date.toString().split("-");
-		bean.setBirth_date(new Date(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])));
+//		String[] date=birth_date.toString().split("-");
+//		bean.setBirth_date(new Date(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2])));
+		bean.setBirth_date(birth_date);
 		System.out.println("api01:"+bean);
 		return ResponseEntity.ok(usersDao.addUser(bean));
 	}
-	@GetMapping("/hotels/editPW/UsersVo(user_id=0, name={name}, email={email}, password={password}, address={address}, birth_date={birth_date})")
+	@GetMapping("/hotels/editPW/{pw}.{id}")
 	public ResponseEntity<?> editPW(
-			@PathVariable String name,@PathVariable String password) {
-		System.out.println(name+password);
-		UsersVo bean=new UsersVo();
-		bean.setName(name);
-		bean.setPassword(password);
-		return ResponseEntity.ok(usersDao.editPassword(bean));
+			@PathVariable String pw,@PathVariable int id) {
+		return ResponseEntity.ok(usersDao.editPassword(pw,id));
 	}
 
 	/////////Tour
@@ -108,31 +116,42 @@ public class HomeController {
 		return ResponseEntity.ok(resvDao.rmResv(reservation_id));
 	}
 	//ResvVo(reservation_id=0, price=0 ,guest_name=null, hotel_name=null, room_info=null, image_url=null, check_in=null, check_out=null)
-	@GetMapping("/hotels/addResv/{hotel_name},{guest_name},{checkin},{checkout},{room_info},{guests},{user_id}")
-	public ResponseEntity<?> addResv(@PathVariable int user_id,@PathVariable String hotel_name, @PathVariable String guest_name,@PathVariable Date checkin,@PathVariable Date checkout,@PathVariable String room_info,@PathVariable int guests) {
-		if(room_info.equals("1")) {
-			return ResponseEntity.ok(resvDao.addResv1(hotel_name, guest_name, checkin, checkout,room_info,guests,user_id));
-		}else if(room_info.equals("2")) {
-			return ResponseEntity.ok(resvDao.addResv2(hotel_name, guest_name, checkin, checkout,room_info,guests,user_id));
-		}else if(room_info.equals("3")) {
-			return ResponseEntity.ok(resvDao.addResv3(hotel_name, guest_name, checkin, checkout,room_info,guests,user_id));
+	@GetMapping("/hotels/addResv/{user_id},guest_name={guest_name},checkin={checkin},checkout={checkout},hotel_id={hotel_id},room_info={room_info},price={price}")
+	public ResponseEntity<?> addResv(@PathVariable int user_id,@PathVariable int hotel_id, @PathVariable String guest_name,
+			@PathVariable Date checkin,@PathVariable Date checkout,@PathVariable String room_info,@PathVariable int price) {
+//		System.out.println(user_id+hotel_id+guest_name+checkin+checkout+room_info+price);
+		if(room_info.equals("½ºÅÄ´Ùµå ·ë")) {
+			return ResponseEntity.ok(resvDao.addResvStand(user_id,guest_name,checkin,checkout,hotel_id,price));
+		}else if(room_info.equals("µð·°½º ·ë")) {
+			return ResponseEntity.ok(resvDao.addResvDelux(user_id,guest_name,checkin,checkout,hotel_id,price));
+		}else{
+			return ResponseEntity.ok(resvDao.addResvPrem(user_id,guest_name,checkin,checkout,hotel_id,price));
 		}
-		return null;
+	}
+	@GetMapping("/hotels/update/hotel_id={hotel_id},room_info={room_info},room_count={room_count}")
+	public ResponseEntity<?> updateRoomCount(@PathVariable int hotel_id,@PathVariable String room_info,@PathVariable int room_count){
+		if(room_info.equals("½ºÅÄ´Ùµå ·ë")) {
+			return ResponseEntity.ok(hotelsDao.updateStandardCount(hotel_id, room_count));
+		}else if(room_info.equals("µð·°½º ·ë")) {
+			return ResponseEntity.ok(hotelsDao.updateDeluxCount(hotel_id, room_count));
+		}else{
+			return ResponseEntity.ok(hotelsDao.updatePremiumCount(hotel_id, room_count));
+		}
 	}
 	/////////Fav
-	@GetMapping("/hotels/userFav/{user}")
-	public ResponseEntity<?> userFav(@PathVariable String user) {
-		return ResponseEntity.ok(favDao.pullUserList(user));
+	@GetMapping("/hotels/userFav/{user_id}")
+	public ResponseEntity<?> userFav(@PathVariable int user_id) {
+		return ResponseEntity.ok(favDao.pullUserList(user_id));
 	}
-	@GetMapping("/hotels/addFav/user_name={user_name},hotel_id={hotel_id}")
+	@GetMapping("/hotels/addFav/user_id={user_id},hotel_id={hotel_id}")
 	public ResponseEntity<?> addFav(
-			@PathVariable String user_name,@PathVariable int hotel_id) {
-		return ResponseEntity.ok(favDao.addFav(user_name,hotel_id));
+			@PathVariable int user_id,@PathVariable int hotel_id) {
+		return ResponseEntity.ok(favDao.addFav(user_id,hotel_id));
 	}
-	@GetMapping("/hotels/rmFav/user_name={user_name},hotel_id={hotel_id}")
+	@GetMapping("/hotels/rmFav/user_id={user_id},hotel_id={hotel_id}")
 	public ResponseEntity<?> rmFav(
-			@PathVariable String user_name,@PathVariable int hotel_id) {
-		return ResponseEntity.ok(favDao.rmFav(user_name,hotel_id));
+			@PathVariable int user_id,@PathVariable int hotel_id) {
+		return ResponseEntity.ok(favDao.rmFav(user_id,hotel_id));
 	}
 	
 	/////////

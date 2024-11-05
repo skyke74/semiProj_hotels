@@ -39,7 +39,7 @@ public class testController {
 
 	@RequestMapping("/")
 	public String home(Model model) {
-		model.addAttribute("result",tourDao.searchTour("±§¡÷"));
+		model.addAttribute("result",hotelsDao.pullList());
 		return "home";
 	}
 	

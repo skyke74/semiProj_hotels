@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class FavVo {
-	String user_name,hotel_name,image_url;
+	String user_name,hotel_name,image_url1;
 	int hotel_id;
 }
