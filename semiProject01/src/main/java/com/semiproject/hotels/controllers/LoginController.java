@@ -94,7 +94,7 @@ public class LoginController {
 	public String signupNew(@ModelAttribute UsersVo bean) {
 		System.out.println(bean);
 		RestTemplate template=new RestTemplate();
-		int result=template.getForObject(url+"hotels/addUser/"+bean, int.class);
+		int result=template.getForObject(url+"hotels/addUser/name="+bean.getName()+",email="+bean.getEmail()+",password="+bean.getPassword()+",address="+bean.getAddress()+",birth_date="+bean.getBirth_date(), int.class);
 		System.out.println(result);
 		return "redirect:/login";
 	}
