@@ -76,7 +76,7 @@ public class HomeController {
 	public ResponseEntity<?> searchUser(@PathVariable String email) {
 		return ResponseEntity.ok(usersDao.searchEmail(email));
 	}
-	@GetMapping("/hotels/addUser/UsersVo(user_id=0, name={name}, email={email}, password={password}, address={address}, birth_date={birth_date})")
+	@GetMapping("/hotels/addUser/name={name},email={email},password={password},address={address},birth_date={birth_date}")
 //	public void addUser(
 	public ResponseEntity<?> addUser(
 			@PathVariable String name,@PathVariable String email,@PathVariable String password,@PathVariable String address,@PathVariable Date birth_date) {
@@ -120,9 +120,9 @@ public class HomeController {
 	public ResponseEntity<?> addResv(@PathVariable int user_id,@PathVariable int hotel_id, @PathVariable String guest_name,
 			@PathVariable Date checkin,@PathVariable Date checkout,@PathVariable String room_info,@PathVariable int price) {
 //		System.out.println(user_id+hotel_id+guest_name+checkin+checkout+room_info+price);
-		if(room_info.equals("½ºÅÄ´Ùµå ·ë")) {
+		if(room_info.equals("ìŠ¤íƒ ë‹¤ë“œ ë£¸")) {
 			return ResponseEntity.ok(resvDao.addResvStand(user_id,guest_name,checkin,checkout,hotel_id,price));
-		}else if(room_info.equals("µð·°½º ·ë")) {
+		}else if(room_info.equals("ë””ëŸ­ìŠ¤ ë£¸")) {
 			return ResponseEntity.ok(resvDao.addResvDelux(user_id,guest_name,checkin,checkout,hotel_id,price));
 		}else{
 			return ResponseEntity.ok(resvDao.addResvPrem(user_id,guest_name,checkin,checkout,hotel_id,price));
@@ -130,9 +130,9 @@ public class HomeController {
 	}
 	@GetMapping("/hotels/update/hotel_id={hotel_id},room_info={room_info},room_count={room_count}")
 	public ResponseEntity<?> updateRoomCount(@PathVariable int hotel_id,@PathVariable String room_info,@PathVariable int room_count){
-		if(room_info.equals("½ºÅÄ´Ùµå ·ë")) {
+		if(room_info.equals("ìŠ¤íƒ ë‹¤ë“œ ë£¸")) {
 			return ResponseEntity.ok(hotelsDao.updateStandardCount(hotel_id, room_count));
-		}else if(room_info.equals("µð·°½º ·ë")) {
+		}else if(room_info.equals("ë””ëŸ­ìŠ¤ ë£¸")) {
 			return ResponseEntity.ok(hotelsDao.updateDeluxCount(hotel_id, room_count));
 		}else{
 			return ResponseEntity.ok(hotelsDao.updatePremiumCount(hotel_id, room_count));
