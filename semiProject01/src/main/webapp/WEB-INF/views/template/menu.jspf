@@ -46,7 +46,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid"></div>
     <div class="navbar-header">
-        <div class="navbar-brand">호텔예약사이트</div>
+        <div class="navbar-brand">Dreams Hotel</div>
     </div>
     <ul class="nav navbar-nav navbar-right custom-nav">
     	<li><a class="user" href="${root }/mypage">${sessionScope.user }님 환영합니다.</a></li>

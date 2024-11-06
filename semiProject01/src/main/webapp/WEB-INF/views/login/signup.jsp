@@ -88,12 +88,16 @@
             <div class="button-container">
                 <p>
                     <button type="submit" class="btn btn-primary btn-lg confirm-btn" >확인</button>
-                    <button type="button" class="btn btn-default btn-lg cancel-btn">취소</button>
+                    <button type="button" class="btn btn-default btn-lg cancel-btn" onclick="goBack()">취소</button>
                 </p>
             </div>
         </form>
     </div>
 <script type="text/javascript">
+function goBack() {
+    window.history.back();  // 이전 페이지로 돌아가기
+}
+
 $('form').one('submit',e=>{
 	validateForm();
 });
