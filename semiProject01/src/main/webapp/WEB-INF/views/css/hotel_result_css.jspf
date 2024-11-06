@@ -53,8 +53,8 @@
     .description-text,
 	.description-text2 {
    
-    margin-left: 50px; /* 왼쪽 간격 설정 (선택 사항) */
-    margin-right: 150px; /* 오른쪽 간격 설정 (선택 사항) */
+    margin-left: 20px; /* 왼쪽 간격 설정 (선택 사항) */
+   	 margin-right: 30px; /* 오른쪽 간격 설정 (선택 사항) */
 }
 	.description-text3,
 	.description-text4

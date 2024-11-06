@@ -48,7 +48,7 @@
                     	&nbsp;&nbsp;${amn }
                     	</c:forEach>
                     </h2> 
-                     <h2>&nbsp;&nbsp;&nbsp;Raum에서 아침 및 점심식사 가능 </h2>               
+                                   
                     <h1><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp;주소 : ${list.address }</h1>
                     <h1><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>&nbsp;전화번호: ${list.contact_number }</h1>
                     
@@ -58,10 +58,10 @@
                     <h1><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                     	<c:choose>
                     		<c:when test='${list.user_id eq sessionScope.user_id && list.user_id>0}'>
-	                    		<a class="fav_del" type="button"> 즐겨찾기 취소</a>
+	                    		<a  class="fav_del" type="button"> 즐겨찾기 취소</a>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    		<a class="fav" type="button"> 즐겨찾기</a>
+	                    		<a  class="fav" type="button"> 즐겨찾기</a>
 	                    	</c:otherwise>
                     	</c:choose>
                     </h1>          
@@ -85,24 +85,7 @@
      			}
      		});
      	</script>
-           	<div class="title-container">
-            <p>주변정보</p> 
-             </div>
-              <div class="image-description">
-                <img alt="주변" src="https://www.google.co.kr/maps/vt/data=ujOU4v37Cu3t7ufxAeMUWr7v82_ft6rlbdu45iLW_H8JpUMsVav7DMnF8VNSNn7Sg3uQpbO-XYVlla8eB3Out9Lh-8v9SAvYm9tUfl8eNFfwxpe4aiy-TzOnpgLXGjEglSMno9XK9Q1pcak6fh9h0SyTamBNq4Haz7SDeNsWrj5yFIOVWhH6quu4X6uLJxsntQT3KpnJLURcI62L7ZGlsWIcNXx1o4QJlwBAGpSMOssx-KFqODwMKs4umXcLHD4ysyFCmajIvffTKQ7F">
-                <div class="description-text">
-                    <p>&nbsp;&nbsp;인근명소</p>
-                     <h1><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp; 광장시장 &nbsp;&nbsp;&nbsp;&nbsp; 도보3분</p>
-                    <h1><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp; 창경궁 &nbsp;&nbsp;&nbsp;&nbsp; 도보7분</p>
-                    <h1><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>&nbsp; 인사동 &nbsp;&nbsp;&nbsp; 도보14분</p> 
-                </div>
-                <div class="description-text2">
-                    <p>&nbsp;&nbsp;교통편</p>
-                    <h1>&nbsp; 종로5가역 &nbsp;&nbsp;&nbsp;&nbsp;도보 5분</p>
-                    <h1>&nbsp;  을지로4가역 &nbsp;&nbsp;&nbsp;&nbsp; 도보7분</p>
-                    <h1>&nbsp;  종로3가역 &nbsp;&nbsp;&nbsp;&nbsp;   도보14분</p> 
-                </div>
-            </div>
+           	
             
             <div class="title-container">
             <p>한눈에 살펴보기</p> 

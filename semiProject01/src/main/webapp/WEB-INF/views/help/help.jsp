@@ -113,49 +113,53 @@
 	
 	<div class="dropdown">
 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			취소 및 환불 정책은 어떻게 되나요?
+			흡연 가능 객실이 있나요?
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-			<li><p>예약 취소 시 호텔 정책에 따라 취소 수수료가 부과될 수 있습니다.</p></li>
-			<li role="separator" class="divider"></li>
-			<li><p>예약 시 취소 가능 기간과 환불 규정을 꼭 확인해 주세요.</p></li>
+			<li><p>일부 호텔은 흡연 가능한 객실을 제공하지만, 많은 호텔이 금연 정책을 시행하고 있습니다.</p></li>
 		</ul>
 	</div>
 	
 	<div class="dropdown">
 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			취소 및 환불 정책은 어떻게 되나요?
+			룸서비스가 가능한가요?
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-			<li><p>예약 취소 시 호텔 정책에 따라 취소 수수료가 부과될 수 있습니다.</p></li>
-			<li role="separator" class="divider"></li>
-			<li><p>예약 시 취소 가능 기간과 환불 규정을 꼭 확인해 주세요.</p></li>
+			<li><p>대부분의 호텔은 룸서비스를 제공하며, 운영 시간과 메뉴를 확인할 수 있습니다.</p></li>
 		</ul>
 	</div>
 	
 	<div class="dropdown">
 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			취소 및 환불 정책은 어떻게 되나요?
+			결제 수단은 무엇을 사용할 수 있나요?
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-			<li><p>예약 취소 시 호텔 정책에 따라 취소 수수료가 부과될 수 있습니다.</p></li>
-			<li role="separator" class="divider"></li>
-			<li><p>예약 시 취소 가능 기간과 환불 규정을 꼭 확인해 주세요.</p></li>
+			<li><p>신용카드, 직불카드, 현금 결제 외에 모바일 결제나 전자결제를 지원할 수 있습니다.</p></li>	
 		</ul>
 	</div>
 	
 	<div class="dropdown">
 		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			취소 및 환불 정책은 어떻게 되나요?
+			객실 내 주방 시설이 있나요?
 			<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-			<li><p>예약 취소 시 호텔 정책에 따라 취소 수수료가 부과될 수 있습니다.</p></li>
+			<li><p>일부 호텔은 주방 시설이 있는 객실을 제공하기도 합니다.</p></li>
 			<li role="separator" class="divider"></li>
-			<li><p>예약 시 취소 가능 기간과 환불 규정을 꼭 확인해 주세요.</p></li>
+			<li><p>해당 객실 유형을 사전에 확인하세요.</p></li>
+		</ul>
+	</div>
+	
+	<div class="dropdown">
+		<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			객실 청소 서비스는 어떻게 제공되나요?
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			<li><p>객실 청소는 매일 제공되거나, 요청 시에만 제공될 수 있습니다. </p></li>		
 		</ul>
 	</div>
 </body>
